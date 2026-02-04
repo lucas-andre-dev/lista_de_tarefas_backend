@@ -1,9 +1,9 @@
 const express = require('express');
-const { listarTodasTarefas } = require('../controllers/tarefa.controller');
+const { listarTodasTarefas, criarTarefa, deleteTarefa,alterarTarefa } = require('../controllers/tarefa.controller');
 const routes = express.Router();
 routes.get("/",listarTodasTarefas);
-routes.post('/'  ,(req,res)=>{res.send('POST')});
-routes.put("/"   ,(req,res)=>{res.send('PUT')});
-routes.delete("/",(req,res)=>{res.send('DELETE')});
+routes.post('/',criarTarefa);
+routes.put("/",alterarTarefa);
+routes.delete("/:id",deleteTarefa);
 
 module.exports = routes;
