@@ -9,9 +9,10 @@ const corsOptions = {
   methods: 'GET,POST,PUT,DELETE',  // Métodos permitidos
   optionsSuccessStatus: 200        // Para navegadores legados
 };
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/tarefas',router);
-app.use(cors(corsOptions));
+
 
 app.listen(port,()=>{
     console.log(`server started on port ${port}`);
