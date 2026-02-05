@@ -1,11 +1,11 @@
 const express = require('express');
-const routes = require('./routes/tarefas.routes.js')
+const router = require('./routes/tarefas.routes.js')
 const cors = require('cors');
 
 const app = express();
 
 app.use(express.json());
-app.use('/tarefas',routes);
+app.use('/tarefas',router);
 app.use(cors({
   origin: '*'
 }));
