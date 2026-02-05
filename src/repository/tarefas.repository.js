@@ -4,12 +4,9 @@ exports.buscarTodasTarefas = async ()=>{
     const resultado = await pool.query(`SELECT * FROM ${tabela}`);
     return resultado.rows;
 };
-
 exports.criarTarefa = async(custo,data_limite,nome_tarefa)=>{
     const sql = `INSERT INTO tarefa_tb(custo,data_limite,nome_tarefa)VALUES($1,$2,$3)`;
-
     const resultado = await pool.query(sql,[custo,data_limite,nome_tarefa]);
-
     return resultado.rowCount;
 
 };
@@ -17,7 +14,6 @@ exports.deletarTarefa = async(id)=>{
     const resultado = await pool.query(`DELETE FROM ${tabela} WHERE id = $1`,[id]);
     return resultado.rowCount;
 };
-
 exports.alterarTarefa = async(id,custo,data_limite,nome_tarefa)=>{
 const resultado = await pool.query(
     `UPDATE ${tabela} 
@@ -25,19 +21,5 @@ const resultado = await pool.query(
     data_limite = $2,
     nome_tarefa = $3
     WHERE id = $4`,[custo,data_limite,nome_tarefa,id]);
-
     return resultado.rowCount;
-
 };
-/*
-pensei em fazer querys personalizadas, porém acredito que se no front end eu passar todos os dados da tarefa no corpo da requisição, posso reutilizar a query alterarTarefa().
-exports.alterarNomeTarefa = async(nome_tarefa,id)=>{
-    const resultado = await pool.query(
-        `UPDATE ${tabela} SET nome_tarefa = $1 WHERE id = $2`,[nome_tarefa,id])
-}
-
-exports.alterar = async(nome_tarefa,id)=>{
-    const resultado = await pool.query(
-        `UPDATE ${tabela} SET nome_tarefa = $1 WHERE id = $2`,[nome_tarefa,id])
-}
-        */
