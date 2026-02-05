@@ -2,6 +2,8 @@ const express = require('express');
 const router = require('../src/routes/tarefas.routes.js');
 const app = express();
 const cors = require('cors');
+const port = process.env.PORT || 3000;
+
 
 app.use(cors({origin:"*"}))
 app.use(express.json());
