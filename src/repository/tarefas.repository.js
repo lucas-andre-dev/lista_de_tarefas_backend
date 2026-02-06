@@ -32,13 +32,13 @@ exports.deletarTarefa = async (id) => {
     }
 };
 
-exports.alterarTarefa = async (id, custo, data_limite, nome_tarefa) => {
+exports.alterarTarefa = async (id, custo, data_limite, nome_tarefa, ordem) => {
     try {
         const resultado = await pool.query(
             `UPDATE ${tabela} 
-             SET custo=$1, data_limite=$2, nome_tarefa=$3 
+             SET custo=$1, data_limite=$2, nome_tarefa=$3, ordem=$4
              WHERE id=$4`,
-            [custo, data_limite, nome_tarefa, id]
+            [custo, data_limite, nome_tarefa, id, ordem]
         );
         return resultado.rowCount;
     } catch (error) {
