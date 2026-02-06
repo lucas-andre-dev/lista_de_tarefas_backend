@@ -14,7 +14,7 @@ exports.buscarTodasTarefas = async () => {
 exports.criarTarefa = async (custo, data_limite, nome_tarefa,ordem) => {
     try {
         const sql = `INSERT INTO ${tabela}(custo, data_limite, nome_tarefa, ordem) VALUES($1,$2,$3,$4)`;
-        const resultado = await pool.query(sql, [custo, data_limite, nome_tarefa]);
+        const resultado = await pool.query(sql, [custo, data_limite, nome_tarefa, ordem]);
         return resultado.rowCount;
     } catch (error) {
         console.error('Erro criarTarefa:', error);
