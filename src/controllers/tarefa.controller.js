@@ -12,11 +12,11 @@ exports.listarTodasTarefas = async (req, res) => {
 
 exports.criarTarefa = async (req, res) => {
     try {
-        const { custo, data_limite, nome_tarefa } = req.body;
-        if (!custo || !data_limite || !nome_tarefa) {
+        const { custo, data_limite, nome_tarefa, ordem } = req.body;
+        if (!custo || !data_limite || !nome_tarefa ||!ordem) {
             return res.status(400).json({ erro: 'Dados incompletos' });
         }
-        await TarefaRepository.criarTarefa(custo, data_limite, nome_tarefa);
+        await TarefaRepository.criarTarefa(custo, data_limite, nome_tarefa,ordem);
         res.status(200).json({ mensagem: 'Tarefa criada' });
     } catch (error) {
         console.error('Erro criarTarefa:', error);
