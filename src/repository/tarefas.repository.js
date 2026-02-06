@@ -46,3 +46,18 @@ exports.alterarTarefa = async (id, custo, data_limite, nome_tarefa) => {
         throw error;
     }
 };
+
+exports.alterarOrdem = async (id,ordem) => {
+    try {
+        const resultado = await pool.query(
+            `UPDATE ${tabela} 
+             SET ordem=$1 
+             WHERE id=$2`,
+            [ordem,id]
+        );
+        return resultado.rowCount;
+    } catch (error) {
+        console.error('Erro alterarTarefa:', error);
+        throw error;
+    }
+};

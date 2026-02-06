@@ -60,3 +60,23 @@ exports.alterarTarefa = async (req, res) => {
         res.status(500).json({ erro: 'Erro interno do servidor' });
     }
 };
+
+exports.alterarOrdem = async (req, res) => {
+    try {
+        const { id,ordem} = req.body;
+        if (!id || !ordem) {
+            return res.status(400).json({ erro: 'Dados incompletos' });
+        }
+        const resultado = await TarefaRepository.alterarOrdem(id,ordem)
+        if (resultado === 0) {
+            return res.status(404).json({ erro: 'Tarefa não encontrada' });
+        }
+        res.status(200).json({ mensagem: 'Tarefa atualizada com sucesso' });
+    } catch (error) {
+        console.error('Erro alterarTarefa:', error);
+        if (error.code === "23505") {
+            return res.status(409).json({ erro: 'Já existe tarefa com esse nome' });
+        }
+        res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+};
