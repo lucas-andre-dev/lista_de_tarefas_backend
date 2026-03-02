@@ -16,7 +16,7 @@ exports.criarTarefa = async (req, res) => {
         if (!custo || !data_limite || !nome_tarefa ||!ordem) {
             return res.status(400).json({ erro: 'Dados incompletos' });
         }
-        await TarefaRepository.criarTarefa(custo.toString(), data_limite, nome_tarefa,ordem);
+        await TarefaRepository.criarTarefa(parseFloat(custo),data_limite, nome_tarefa,ordem);
         res.status(200).json({ mensagem: 'Tarefa criada' });
     } catch (error) {
         console.error('Erro criarTarefa:', error);
@@ -47,7 +47,7 @@ exports.alterarTarefa = async (req, res) => {
         if (!id || !custo || !data_limite || !nome_tarefa) {
             return res.status(400).json({ erro: 'Dados incompletos' });
         }
-        const resultado = await TarefaRepository.alterarTarefa(id, custo.toString(), data_limite, nome_tarefa);
+        const resultado = await TarefaRepository.alterarTarefa(id,parseFloat(custo), data_limite, nome_tarefa);
         if (resultado === 0) {
             return res.status(404).json({ erro: 'Tarefa não encontrada' });
         }
