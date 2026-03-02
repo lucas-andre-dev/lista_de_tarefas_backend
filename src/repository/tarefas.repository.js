@@ -13,7 +13,7 @@ exports.buscarTodasTarefas = async () => {
 
 exports.criarTarefa = async (custo, data_limite, nome_tarefa,ordem) => {
     try {
-        const sql = `INSERT INTO ${tabela}(custo, data_limite, nome_tarefa, ordem) VALUES($1,$2,$3,$4)`;
+        const sql = `INSERT INTO ${tabela}(custo, data_limite, nome_tarefa, ordem) VALUES($1::NUMERIC,$2,$3,$4)`;
         const resultado = await pool.query(sql, [custo, data_limite, nome_tarefa, ordem]);
         return resultado.rowCount;
     } catch (error) {
@@ -36,7 +36,7 @@ exports.alterarTarefa = async (id, custo, data_limite, nome_tarefa) => {
     try {
         const resultado = await pool.query(
             `UPDATE ${tabela} 
-             SET custo=$1, data_limite=$2, nome_tarefa=$3 
+             SET custo=$1::NUMERIC, data_limite=$2, nome_tarefa=$3 
              WHERE id=$4`,
             [custo, data_limite, nome_tarefa, id]
         );
